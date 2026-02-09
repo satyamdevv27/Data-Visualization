@@ -7,6 +7,7 @@ import ChartPie from "./pie";
 import ChartLine from "./linechart";
 
 function Dashboard() {
+  const url = "https://data-visualization-4dd0.onrender.com"
   const [allData, setAllData] = useState([]);
   const [data, setData] = useState([]);
 
@@ -20,7 +21,7 @@ function Dashboard() {
 
   // 🔹 fetch ALL data once
   useEffect(() => {
-    fetch("http://localhost:8080/api/insights")
+    fetch(`${url}/api/insights`)
       .then((res) => res.json())
       .then((result) => {
         setAllData(result);
@@ -36,7 +37,7 @@ function Dashboard() {
       .map(([key, value]) => `${key}=${value}`)
       .join("&");
 
-    fetch(`http://localhost:8080/api/insights?${query}`)
+    fetch(`${url}/api/insights?${query}`)
       .then((res) => res.json())
       .then((result) => setData(result))
       .catch(console.error);
